@@ -1,0 +1,50 @@
+🔹 Task Breakdown
+✅ Setup: Creating Users and Assigning Incorrect Permissions
+Create Multiple Users:
+
+
+sudo useradd user1
+sudo useradd user2
+sudo passwd user1
+sudo passwd user2
+Set passwords for the users.
+
+Assign Incorrect Permissions:
+
+sudo chmod 777 /etc/shadow
+sudo chmod 777 /etc/passwd
+This makes the sensitive files readable and writable by all users.
+
+✅ Exploit: Accessing Sensitive Files as a Low-Privileged User
+Switch to a low-privileged user:
+su user1
+Try accessing sensitive files:
+
+cat /etc/shadow
+cat /etc/passwd
+If successful, this confirms the misconfiguration.
+
+✅ Mitigation: Fixing Permissions
+Revoke Excess Permissions:
+
+sudo chmod 640 /etc/shadow
+sudo chmod 644 /etc/passwd
+Set Correct Ownership:
+
+sudo chown root:shadow /etc/shadow
+sudo chown root:root /etc/passwd
+Limit sudo Privileges:
+
+sudo visudo
+Ensure only necessary users have sudo access.
+
+📌 Deliverables
+Report: Document the commands, screenshots of exploit and fix.
+
+Video: Screen recording showing:
+
+Creating users
+
+Exploiting misconfiguration
+
+Fixing permissions
